@@ -20,7 +20,7 @@ function FilterSelect({
   const { filters, setFilter } = useFilters();
   return (
     <Select value={filters[field]} onValueChange={(v) => setFilter(field, v)}>
-      <SelectTrigger size="sm" className="w-full min-w-0 bg-card text-xs">
+      <SelectTrigger className="h-8 w-full min-w-0 bg-card text-xs">
         <SelectValue placeholder={label} />
       </SelectTrigger>
       <SelectContent className="max-h-72">

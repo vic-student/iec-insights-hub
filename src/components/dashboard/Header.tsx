@@ -49,8 +49,7 @@ export function Header() {
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
           <Select value={filters.mes} onValueChange={(v) => setFilter("mes", v)}>
             <SelectTrigger
-              size="sm"
-              className="w-[130px] border-white/20 bg-white/5 text-xs text-white data-[placeholder]:text-white/60"
+              className="h-8 w-[130px] border-white/20 bg-white/5 text-xs text-white data-[placeholder]:text-white/60"
             >
               <SelectValue placeholder="Período" />
             </SelectTrigger>
