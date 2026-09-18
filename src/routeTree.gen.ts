@@ -12,7 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComercialRouteImport } from './routes/comercial'
 import { Route as ConversaoRouteImport } from './routes/conversao'
+import { Route as ElevaRouteImport } from './routes/eleva'
+import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as LeadsRouteImport } from './routes/leads'
+import { Route as LocalizacaoRouteImport } from './routes/localizacao'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +32,24 @@ const ConversaoRoute = ConversaoRouteImport.update({
   path: '/conversao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ElevaRoute = ElevaRouteImport.update({
+  id: '/eleva',
+  path: '/eleva',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndicadoresRoute = IndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeadsRoute = LeadsRouteImport.update({
   id: '/leads',
   path: '/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocalizacaoRoute = LocalizacaoRouteImport.update({
+  id: '/localizacao',
+  path: '/localizacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -39,34 +57,68 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comercial': typeof ComercialRoute
   '/conversao': typeof ConversaoRoute
+  '/eleva': typeof ElevaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/leads': typeof LeadsRoute
+  '/localizacao': typeof LocalizacaoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comercial': typeof ComercialRoute
   '/conversao': typeof ConversaoRoute
+  '/eleva': typeof ElevaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/leads': typeof LeadsRoute
+  '/localizacao': typeof LocalizacaoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/comercial': typeof ComercialRoute
   '/conversao': typeof ConversaoRoute
+  '/eleva': typeof ElevaRoute
+  '/indicadores': typeof IndicadoresRoute
   '/leads': typeof LeadsRoute
+  '/localizacao': typeof LocalizacaoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/comercial' | '/conversao' | '/leads'
+  fullPaths:
+    | '/'
+    | '/comercial'
+    | '/conversao'
+    | '/eleva'
+    | '/indicadores'
+    | '/leads'
+    | '/localizacao'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/comercial' | '/conversao' | '/leads'
-  id: '__root__' | '/' | '/comercial' | '/conversao' | '/leads'
+  to:
+    | '/'
+    | '/comercial'
+    | '/conversao'
+    | '/eleva'
+    | '/indicadores'
+    | '/leads'
+    | '/localizacao'
+  id:
+    | '__root__'
+    | '/'
+    | '/comercial'
+    | '/conversao'
+    | '/eleva'
+    | '/indicadores'
+    | '/leads'
+    | '/localizacao'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComercialRoute: typeof ComercialRoute
   ConversaoRoute: typeof ConversaoRoute
+  ElevaRoute: typeof ElevaRoute
+  IndicadoresRoute: typeof IndicadoresRoute
   LeadsRoute: typeof LeadsRoute
+  LocalizacaoRoute: typeof LocalizacaoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +144,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConversaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eleva': {
+      id: '/eleva'
+      path: '/eleva'
+      fullPath: '/eleva'
+      preLoaderRoute: typeof ElevaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indicadores': {
+      id: '/indicadores'
+      path: '/indicadores'
+      fullPath: '/indicadores'
+      preLoaderRoute: typeof IndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leads': {
       id: '/leads'
       path: '/leads'
       fullPath: '/leads'
       preLoaderRoute: typeof LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/localizacao': {
+      id: '/localizacao'
+      path: '/localizacao'
+      fullPath: '/localizacao'
+      preLoaderRoute: typeof LocalizacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,7 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComercialRoute: ComercialRoute,
   ConversaoRoute: ConversaoRoute,
+  ElevaRoute: ElevaRoute,
+  IndicadoresRoute: IndicadoresRoute,
   LeadsRoute: LeadsRoute,
+  LocalizacaoRoute: LocalizacaoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
