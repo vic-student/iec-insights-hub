@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComercialRouteImport } from './routes/comercial'
+import { Route as ConversaoRouteImport } from './routes/conversao'
 import { Route as LeadsRouteImport } from './routes/leads'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComercialRoute = ComercialRouteImport.update({
+  id: '/comercial',
+  path: '/comercial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConversaoRoute = ConversaoRouteImport.update({
+  id: '/conversao',
+  path: '/conversao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeadsRoute = LeadsRouteImport.update({
@@ -25,27 +37,35 @@ const LeadsRoute = LeadsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/comercial': typeof ComercialRoute
+  '/conversao': typeof ConversaoRoute
   '/leads': typeof LeadsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/comercial': typeof ComercialRoute
+  '/conversao': typeof ConversaoRoute
   '/leads': typeof LeadsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/comercial': typeof ComercialRoute
+  '/conversao': typeof ConversaoRoute
   '/leads': typeof LeadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/leads'
+  fullPaths: '/' | '/comercial' | '/conversao' | '/leads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/leads'
-  id: '__root__' | '/' | '/leads'
+  to: '/' | '/comercial' | '/conversao' | '/leads'
+  id: '__root__' | '/' | '/comercial' | '/conversao' | '/leads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComercialRoute: typeof ComercialRoute
+  ConversaoRoute: typeof ConversaoRoute
   LeadsRoute: typeof LeadsRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comercial': {
+      id: '/comercial'
+      path: '/comercial'
+      fullPath: '/comercial'
+      preLoaderRoute: typeof ComercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conversao': {
+      id: '/conversao'
+      path: '/conversao'
+      fullPath: '/conversao'
+      preLoaderRoute: typeof ConversaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leads': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComercialRoute: ComercialRoute,
+  ConversaoRoute: ConversaoRoute,
   LeadsRoute: LeadsRoute,
 }
 export const routeTree = rootRouteImport
